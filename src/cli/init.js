@@ -23,7 +23,7 @@ const assertDoesntExist = file => {
   if (fs.existsSync(file)) {
     util.print(
       'error',
-      'package.json or botfile.js are already in repository, ' + 'remove them before running this command again.'
+      'package.json or config/core.js are already in repository, remove them before running this command again.'
     )
     process.exit(1)
   }
@@ -45,10 +45,12 @@ const generateTemplate = (filename, variables = {}) => {
 const generate = result => {
   generateTemplate('package.json', result)
   generateTemplate('LICENSE')
-  generateTemplate('botfile.js')
   generateTemplate('index.js')
   generateTemplate('_._gitignore')
   generateTemplate('_._welcome')
+
+  fs.mkdirSync('config')
+  fs.copyFileSync(path.join(__dirname, 'cli/templates/init', 'core.json'), 'config/core.json')
 
   fs.mkdirSync('data')
   fs.writeFileSync('data/bot.log', '')
@@ -89,7 +91,7 @@ module.exports = program => {
 
   util.print(introductionText)
 
-  _.each(['package.json', 'botfile.js', 'index.js'], assertDoesntExist)
+  _.each(['package.json', 'core/config.json', 'index.js'], assertDoesntExist)
 
   const currentDirectoryName = path.basename(path.resolve('./'))
 
