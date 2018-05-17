@@ -11,26 +11,19 @@ This is the reference bot. It both provides the standard testing environment and
 to create such bot manually outside of the botpress project, and use `yarn` / `npm` linking to make it work with your
 dev version of botpress.
 
-This bot is already configured to work with the version of botpress from your clone of the repo.
-
-## How does it work?
-
-It uses the special `file:` syntax for dependencies, supported by npm. That way the bot always works with the botpress built in your project folder.
-
 ## How do I use it?
 
-First, you **must have npm >= 5.6.0** to use this properly.
-(_Because this is the first version of npm that creates symlinks instead of one-time copy for `file:` deps._)
+Clone the entire repo. In the root folder run `yarn install` and then `./node_modules/.bin/lerna bootstrap`.
 
-So now run `npm install` in the `dev-bot` folder. You only need to do it once.
+You need to do bootstrap every time you pull new dependencies from the repository.
 
 Then, each time you start working on botpress:
 
-1. First, do the normal `yarn install` in the **root** of the botpress project (one level higher than this file's directory).
+1. Run `./node_modules/.bin/lerna run compile` in the root folder
 
-1. Then run `yarn run watch` there. This will keep recompiling botpress as you make changes.
+1. Run `yarn watch` in every package you plan to work on. This will keep recompiling packages as you make changes.
 
-1. Finally, run `npm start` in the `dev-bot` folder.
+1. Finally, run `yarn start` in the `dev-bot` folder.
 
 
 ## What can be improved?
@@ -44,5 +37,6 @@ There are several things needed for the modern level of DX:
 1. Speedup the botpress build time:
 
     * Do not rebuild node bundle when only the web part has changes
+    * Do not build node bundle in development
     * Make each build faster (use caches, incremental builds if possible)
-    * Does yarn support the same symlinking functionality? Should we use it instead?
+    * Add hot-reload for the server and the client

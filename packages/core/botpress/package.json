@@ -114,7 +114,6 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-thunk": "^2.2.0",
-    "require-npm-version": "^1.0.2",
     "sass-loader": "^6.0.6",
     "script-loader": "^0.7.0",
     "simple-line-icons": "^2.4.1",
@@ -147,11 +146,7 @@
   "license": "AGPL-3.0",
   "main": "lib/node.bundle.js",
   "repository": "git+https://github.com/botpress/botpress.git",
-  "os": [
-    "darwin",
-    "linux",
-    "win32"
-  ],
+  "os": ["darwin", "linux", "win32"],
   "scripts": {
     "prepublishOnly": "npm run compile-prod",
     "compile": "./build.sh",
@@ -161,9 +156,7 @@
   },
   "watch": {
     "compile": {
-      "patterns": [
-        "src"
-      ],
+      "patterns": ["src"],
       "extensions": "js,jsx,scss,json,html"
     }
   }

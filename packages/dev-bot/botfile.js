@@ -1,7 +1,6 @@
-const yn = require('yn')
 const isProd = process.env.NODE_ENV === 'production'
 const port = process.env.BOTPRESS_PORT || process.env.PORT || 3000
-const botUrl = process.env.BOTPRESS_URL || 'http://localhost:' + port
+const botUrl = process.env.BOTPRESS_URL || `http://localhost:${port}`
 
 module.exports = {
   /*
@@ -25,7 +24,7 @@ module.exports = {
     Where the content is stored
     You can access this property from `bp.dataLocation`
   */
-  dataDir: process.env.BOTPRESS_DATA_DIR || './data',
+  dataDir: process.env.BOTPRESS_DATA_DIR || './.data',
 
   /*
     Some modules might generate static configuration files
@@ -35,22 +34,22 @@ module.exports = {
   /*
     Path to Content Types
    */
-  contentDir: './content',
+  contentDir: './src/content',
 
   /*
     Path to Flows
    */
-  flowsDir: './flows',
+  flowsDir: './generated/flows',
 
   /*
     Path to Content Types Data
    */
-  contentDataDir: './content_data',
+  contentDataDir: './generated/content',
 
   /*
     Path to media / file uploads
    */
-  mediaDir: './media',
+  mediaDir: './generated/media',
 
   /*
     By default logs are enabled and available in `dataDir`
@@ -72,7 +71,7 @@ module.exports = {
     Dialog Manager (DM)
   */
   dialogs: {
-    timeoutInterval: '15m',
+    timeoutInterval: '2m',
     janitorInterval: '10s'
   },
 
@@ -102,7 +101,7 @@ module.exports = {
   */
   login: {
     enabled: process.env.NODE_ENV === 'production',
-    useCloud: yn(process.env.BOTPRESS_CLOUD_ENABLED || 'true'),
+    useCloud: process.env.BOTPRESS_CLOUD_ENABLED,
     tokenExpiry: '6 hours',
     password: process.env.BOTPRESS_PASSWORD || 'password',
     maxAttempts: 3,
@@ -130,11 +129,5 @@ module.exports = {
       If this is set to false, you should call `bp.middlewares.load` manually
      */
     autoLoading: true
-  },
-
-  // **** Update this if you bought a Botpress license ****
-  license: {
-    // customerId: process.env.BOTPRESS_CUSTOMER_ID || 'your_customer_id_here',
-    // licenseKey: process.env.BOTPRESS_LICENSE_KEY || 'your_key_here'
   }
 }

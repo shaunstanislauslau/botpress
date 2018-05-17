@@ -5,7 +5,8 @@
     "packages/channels/*",
     "packages/skills/*",
     "packages/utils/*",
-    "packages/core/*"
+    "packages/core/*",
+    "packages/dev-bot"
   ],
   "version": "10.9.4",
   "npmClient": "yarn"
